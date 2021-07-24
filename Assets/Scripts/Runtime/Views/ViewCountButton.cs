@@ -9,7 +9,7 @@ namespace SCA
     // View can't depend on another View.
     // View can't depend on Use Case, Gateway
     // View can inherit Monobehaviour
-    public class CountButtonView : MonoBehaviour
+    public class ViewCountButton : MonoBehaviour
     {
         public CountType Type;
 

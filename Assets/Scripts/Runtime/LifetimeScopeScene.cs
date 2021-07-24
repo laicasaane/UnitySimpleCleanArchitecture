@@ -4,7 +4,7 @@ using VContainer.Unity;
 
 namespace SCA
 {
-    public class UnitySCALifetimeScope : LifetimeScope
+    public class LifetimeScopeScene : LifetimeScope
     {
         protected override void Configure(IContainerBuilder builder)
         {

@@ -11,7 +11,7 @@ namespace SCA
     // View can't depend on another View.
     // View can't depend on Use Case, Gateway
     // View can inherit Monobehaviour
-    public class TotalNumberTextView : MonoBehaviour
+    public class ViewTotalNumberText : MonoBehaviour
     {
         [Inject] private readonly IPresenterTotalCount presenter;
         [Inject] private readonly ISubscriber<CountType, int> subscriber;

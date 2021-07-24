@@ -748,7 +748,7 @@ GameObject:
   - component: {fileID: 1868023483}
   - component: {fileID: 1868023482}
   m_Layer: 0
-  m_Name: UnitySCALifetimeScope
+  m_Name: LifetimeScopeScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -771,7 +771,6 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 1581474188}
-  transformCanvas: {fileID: 1581474192}
 --- !u!4 &1868023483
 Transform:
   m_ObjectHideFlags: 0
