@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UniRx;
+using MessagePipe;
 using VContainer;
 
 namespace SCA
@@ -15,24 +16,43 @@ namespace SCA
         public CountType Type;
 
         [Inject]
-        private readonly ICountPresenter presenter;
+        private readonly ISubscriber<CountType, int> subscriber;
 
-        private Text text;
+        private Handler handler;
+        private IDisposable subscription;
 
         private void Start()
         {
-            this.text = GetComponent<Text>();
+            var text = GetComponent<Text>();
+            this.handler = new Handler(this.Type, text);
 
-            var reactive_property = this.Type == CountType.A ? this.presenter.CountA : this.presenter.CountB;
+            var bag = DisposableBag.CreateBuilder();
+            this.subscriber.Subscribe(this.Type, this.handler).AddTo(bag);
+            this.subscription = bag.Build();
 
-            reactive_property.Subscribe(UpdateText).AddTo(this);
-
-            UpdateText(0); // Initialize
+            this.handler.Handle(0); // Initialize
         }
 
-        private void UpdateText(int count)
+        private void OnDestroy()
         {
-            this.text.text = string.Format("Count {0} = {1}", this.Type.ToString(), count);
+            this.subscription.Dispose();
+        }
+
+        private class Handler : IMessageHandler<int>
+        {
+            private readonly Text text;
+            private readonly string type;
+
+            public Handler(CountType type, Text text)
+            {
+                this.type = type.ToString();
+                this.text = text;
+            }
+
+            public void Handle(int message)
+            {
+                this.text.text = string.Format("Count {0} = {1}", this.type, message);
+            }
         }
     }
 }

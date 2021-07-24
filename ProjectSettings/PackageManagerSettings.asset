@@ -28,7 +28,9 @@ MonoBehaviour:
     m_Name: package.openupm.com
     m_Url: https://package.openupm.com
     m_Scopes:
-    - com.neuecc.unirx
+    - com.cysharp.messagepipe
+    - com.cysharp.messagepipe.vcontainer
+    - com.cysharp.unitask
     - com.openupm
     - com.svermeulen.extenject
     - jp.hadashikick.vcontainer
@@ -43,7 +45,9 @@ MonoBehaviour:
       m_Name: package.openupm.com
       m_Url: https://package.openupm.com
       m_Scopes:
-      - com.neuecc.unirx
+      - com.cysharp.messagepipe
+      - com.cysharp.messagepipe.vcontainer
+      - com.cysharp.unitask
       - com.openupm
       - com.svermeulen.extenject
       - jp.hadashikick.vcontainer
@@ -53,7 +57,9 @@ MonoBehaviour:
     m_Name: package.openupm.com
     m_Url: https://package.openupm.com
     m_Scopes:
-    - com.neuecc.unirx
+    - com.cysharp.messagepipe
+    - com.cysharp.messagepipe.vcontainer
+    - com.cysharp.unitask
     - com.openupm
     - com.svermeulen.extenject
     - jp.hadashikick.vcontainer

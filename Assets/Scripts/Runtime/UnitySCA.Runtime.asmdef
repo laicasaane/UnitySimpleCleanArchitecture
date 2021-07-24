@@ -2,7 +2,9 @@
     "name": "UnitySCA.Runtime",
     "rootNamespace": "",
     "references": [
-        "UniRx",
+        "UniTask",
+        "MessagePipe",
+        "MessagePipe.VContainer",
         "VContainer",
         "VContainer.EnableCodeGen"
     ],

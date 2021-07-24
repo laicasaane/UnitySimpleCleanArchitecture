@@ -3,12 +3,12 @@ namespace SCA
     // Gateway
     // Gateway can't depend on View, Presenter, Usecase
     // Gateway can't inherit Monobehaviour
-    public class CountDBGateway : ICountDBGateway
+    public class GatewayCountDB : IGatewayCountDB
     {
         private readonly Count CountA;
         private readonly Count CountB;
 
-        public CountDBGateway()
+        public GatewayCountDB()
         {
             this.CountA = new Count()
             {
@@ -21,15 +21,15 @@ namespace SCA
             };
         }
 
-        public void SetCount(CountType type, int new_value)
+        public void SetCount(CountType type, int value)
         {
             if (type == CountType.A)
             {
-                this.CountA.Num = new_value;
+                this.CountA.Value = value;
             }
             else if (type == CountType.B)
             {
-                this.CountB.Num = new_value;
+                this.CountB.Value = value;
             }
         }
 
@@ -37,11 +37,11 @@ namespace SCA
         {
             if (type == CountType.A)
             {
-                return this.CountA.Num;
+                return this.CountA.Value;
             }
             else if (type == CountType.B)
             {
-                return this.CountB.Num;
+                return this.CountB.Value;
             }
             else
             {

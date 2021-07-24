@@ -4,10 +4,12 @@ namespace SCA
 
     // IUsecase
     // Interface for Usecase
-    public interface ICounterUsecase
+    public interface IUsecaseCounter
     {
         void IncrementCount(CountType type);
+
         int GetCount(CountType type);
+
         ReadEventHandler<CounterEventArgs> OnCountChanged { get; set; }
     }
 

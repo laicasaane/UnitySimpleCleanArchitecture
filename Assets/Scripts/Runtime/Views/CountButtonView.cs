@@ -14,7 +14,7 @@ namespace SCA
         public CountType Type;
 
         [Inject]
-        private readonly ICountPresenter presenter;
+        private readonly IPresenterCount presenter;
 
         private Button button;
 

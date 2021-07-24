@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UniRx;
+using MessagePipe;
 using VContainer;
 
 namespace SCA
@@ -12,25 +13,46 @@ namespace SCA
     // View can inherit Monobehaviour
     public class TotalNumberTextView : MonoBehaviour
     {
-        [Inject]
-        private readonly ICountPresenter presenter;
+        [Inject] private readonly IPresenterTotalCount presenter;
+        [Inject] private readonly ISubscriber<CountType, int> subscriber;
 
-        private Text text;
+        private Handler handler;
+        private IDisposable subscription;
 
         private void Start()
         {
-            this.text = GetComponent<Text>();
+            var text = GetComponent<Text>();
+            this.handler = new Handler(text, this.presenter);
 
-            this.presenter.CountA.Subscribe(UpdateCount).AddTo(this);
-            this.presenter.CountB.Subscribe(UpdateCount).AddTo(this);
+            var bag = DisposableBag.CreateBuilder();
+            this.subscriber.Subscribe(CountType.A, this.handler).AddTo(bag);
+            this.subscriber.Subscribe(CountType.B, this.handler).AddTo(bag);
+            this.subscription = bag.Build();
+
+            this.handler.Handle(0); // Initialize
         }
 
-        private void UpdateCount(int value)
+        private void OnDestroy()
         {
-            var a = this.presenter.CountA.Value;
-            var b = this.presenter.CountB.Value;
-            var total = a + b;
-            this.text.text = string.Format("Total = {0}", total);
+            this.subscription.Dispose();
+        }
+
+        private class Handler : IMessageHandler<int>
+        {
+            private readonly Text text;
+            private readonly IPresenterTotalCount presenter;
+
+            public Handler(Text text, IPresenterTotalCount presenter)
+            {
+                this.text = text;
+                this.presenter = presenter;
+            }
+
+            public void Handle(int message)
+            {
+                var total = this.presenter.GetTotalCount();
+                this.text.text = string.Format("Total = {0}", total);
+            }
         }
     }
 }

@@ -1,20 +1,16 @@
-using System;
-using VContainer;
-
 namespace SCA
 {
     // Usecase
     // Usecase can depend on Gateway through its interface.
     // Usecase can't be dependent on View, Presenter
     // Usecase can't inherit Monobehaviour
-    public class CounterUsecase : ICounterUsecase
+    public class UsecaseCounter : IUsecaseCounter
     {
         public ReadEventHandler<CounterEventArgs> OnCountChanged { get; set; }
 
-        private readonly ICountDBGateway gateway;
+        private readonly IGatewayCountDB gateway;
 
-        [Inject]
-        public CounterUsecase(ICountDBGateway gateway)
+        public UsecaseCounter(IGatewayCountDB gateway)
         {
             this.gateway = gateway;
         }

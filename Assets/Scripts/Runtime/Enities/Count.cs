@@ -10,7 +10,8 @@ namespace SCA
     // Entity can't inherit Monobehaviour
     public class Count
     {
-        public CountType Type { get; set; } // type of this count
-        public int Num { get; set; } // numlber of count
+        public CountType Type { get; set; }
+
+        public int Value { get; set; }
     }
 }
